@@ -1,24 +1,27 @@
 trigger:
 - main
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 variables:
-  resourceGroupName: 'myResourceGroup'
-  templateFile: 'storageAccount.json'
-  parametersFile: 'storageAccount.parameters.json'
+  location: 'East US'
+  storageAccountName: 'mystorageacctdemo123'
 
-steps:
-- task: AzureResourceManagerTemplateDeployment@3
-  inputs:
-    deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: '<Your-Service-Connection-Name>'
-    subscriptionId: '<Your-Subscription-ID>'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: '$(resourceGroupName)'
-    location: 'East US'
-    templateLocation: 'Linked artifact'
-    csmFile: '$(templateFile)'
-    csmParametersFile: '$(parametersFile)'
-    deploymentMode: 'Incremental'
+stages:
+- stage: Deploy
+  jobs:
+  - job: DeployStorage
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: AzureResourceManagerTemplateDeployment@3
+      inputs:
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'serviceconnection1'
+        subscriptionId: 'b56841e0-d756-4c89-b7dd-9ac1739b47e2'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: 'newdemo'
+        location: 'East US'
+        templateLocation: 'Linked artifact'
+        csmFile: 'storageaccount.json'
+        overrideParameters: '-storageAccountName mystorageacctdemo123'
+
+
