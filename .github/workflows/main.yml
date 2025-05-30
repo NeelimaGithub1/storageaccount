@@ -1,0 +1,28 @@
+name: Deploy Storage Account
+
+on:
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.CLIENT_ID }}
+        tenant-id: ${{ secrets.TENANT_ID }}
+        subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
+        client-secret: ${{ secrets.CLIENT_SECRET }}
+
+    - name: Deploy ARM Template
+      uses: azure/arm-deploy@v1
+      with:
+        resourceGroupName: newdemo
+        template: ./storageaccount.json
+        parameters: ''
+        deploymentName: github-deployment
