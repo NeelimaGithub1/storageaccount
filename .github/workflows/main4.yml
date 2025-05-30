@@ -21,7 +21,7 @@ jobs:
       with:
         resourceGroupName: "newdemo"
         template: ./storageaccount.json
-        parameters: storageAccountName=storage${{ github.run_id }}
+        parameters: storageAccountName=neelimastorageacc01
         deploymentName: github-deployment
 
 
