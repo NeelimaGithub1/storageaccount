@@ -22,5 +22,5 @@ stages:
         location: 'East US'
         templateLocation: 'Linked artifact'
         csmFile: 'storageaccount.json'
-        overrideParameters:  '-storageAccountName mystorageacctdemo123'
+        overrideParameters: '-storageAccountName mystorageacctdemo123'
 
