@@ -21,6 +21,6 @@ stages:
         resourceGroupName: 'newdemo'
         location: 'East US'
         templateLocation: 'Linked artifact'
-        csmFile: 'storageaccount.json'
+        csmFile:  'storageaccount.json'
         overrideParameters:   '-storageAccountName mystorageacctdemo123'
 
