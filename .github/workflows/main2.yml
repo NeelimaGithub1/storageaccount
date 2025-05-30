@@ -2,7 +2,7 @@ name: Deploy Storage Account
 
 on:
   workflow_dispatch:  # Allows manual trigger from GitHub UI
-  
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -21,5 +21,7 @@ jobs:
       with:
         resourceGroupName: "newdemo"
         template: ./storageaccount.json
-        parameters: storageAccountName=myuniquestorageacct123
+        parameters: storageAccountName=storage${{ github.run_id }}
         deploymentName: github-deployment
+
+
